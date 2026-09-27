@@ -1,9 +1,9 @@
-# Setting-up-an-AP7930-PDU-with-Home-Assistant
-Setting up an AP7930 PDU with Home Assistant
+# Setting-up-an-AP7921 -PDU-with-Home-Assistant
+Setting up an AP7921  PDU with Home Assistant
 
 
-Setting up an AP7930 PDU with Home Assistant
-Jul 8, 2022
+Setting up an AP7921  PDU with Home Assistant
+september 27th 2026
 Overview
 I have a workbench in my office for working on various projects. There are more devices than the current regular power strip has outlets. For this reason, I wanted to mount a power strip to the wall behind the workbench. After looking at various options, I came up with the idea to use a used power distribution unit (PDU) and found a switched one that was a decent price. With it being a switched PDU I can remotely turn outlets on/off and monitor the load across all outlets. This is definitely overkill but a fun project.
 
@@ -90,7 +90,7 @@ snmpset -v 1 -c private $DEVICEIP PowerNet-MIB::mfiletransferControlInitiateFile
 6 - If it worked correctly, it should reset and you can access it by DHCP with the default username and password apc. Reset all the settings by going under Administration - General - Reset/Reboot, click Reset All, and Apply.
 
 Updating the Firmware
-The device will likely not be running the latest firmware. It took a little while to find but the latest version can be downloaded from here https://www.apc.com/us/en/product/SFRPDU374_390/ap7xxx-switched-metered-rack-power-distribution-unit-firmware-revision-3-7-4-aos-3-9-0/. Once it is downloaded, extract it and run the executable. It will ask for the IP address of the device along with the username and password. The rest of the update process will be handled by the program. If there are any issues you can also update the device by logging in over ftp and uploading the rpdu and aos bin files after switching to binary mode.
+The update file is attached or device will likely not be running the latest firmware.  Once it is downloaded, extract it and run the executable. It will ask for the IP address of the device along with the username and password. The rest of the update process will be handled by the program. If there are any issues you can also update the device by logging in over ftp and uploading the rpdu and aos bin files after switching to binary mode.
 
 Configuring the Device
 Note that the security support on these devices is lacking. You can enable HTTPS, SSH, SNMPv3 but the ciphers it uses are outdated and not supported by modern clients. The easiest option is to change the default passwords and then segment it off from any untrusted devices. Under Administration - Security - Local Users, change the password for the administrator user and then uncheck access enabled for the device and read-only account. For Home Assistant to control the device we will use SNMPv1, SNMPv3 would be preferred but I couldn’t get it working with the default SNMP integration. Make sure SNMPv1 is enabled by going to Administration - Network - SNMPv1 - access and checking Enable SNMPv1 access. Set the SNMPv1 community strings by going to access control right under the current page link. Click the first community name and change it to a secure string and change Access Type to write. Then go and change the other community names access type to disabled.
