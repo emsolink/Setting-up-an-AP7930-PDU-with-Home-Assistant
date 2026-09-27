@@ -124,3 +124,4 @@ sensor:
     value_template: "{{((value | float) / 10) | float}}"
 
 Once the configuration is done, restart Home Assistant and everything hopefully should work. You now can create automations to control the PDU, manually switch outlets on/off, etc.Home Assistant Screen
+
